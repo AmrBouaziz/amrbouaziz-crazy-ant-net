@@ -17,7 +17,6 @@ jobs:
     - name: All things angular
       uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.4.0
       with:
-        project_name: app
         github_access_token: ${{ secrets.GITHUB_TOKEN }} # see the Configuration section for how you can create secrets
         build_configuration: production # The build environment for the app. please look configurations in your angular.json
         base_href: ''   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
