@@ -1,6 +1,5 @@
 import { RedmineApi } from './redmine-api';
 import { lastValueFrom, of } from 'rxjs';
-import { XMLBuilder } from 'fast-xml-parser';
 import { Axios } from 'axios-observable';
 
 const redmineBaseUrl = 'https://redmine.squeezer-software.com';
@@ -15,15 +14,14 @@ describe(RedmineApi.name, () => {
     //  see more at https://github.com/axios/axios/issues/1180
     Axios.defaults.adapter = 'http';
 
-    redmineApi = new RedmineApi(
-      redmineBaseUrl,
-      redmineAccessKey,
-    );
+    redmineApi = new RedmineApi(redmineBaseUrl, redmineAccessKey);
   });
 
   describe(RedmineApi.prototype.buildXmlBody.name, () => {
     it('should build xml body', () => {
-      expect(redmineApi.buildXmlBody('2021/12/31', issue, comment)).toMatchSnapshot();
+      expect(
+        redmineApi.buildXmlBody('2021/12/31', 26151, 'LCL'),
+      ).toMatchSnapshot();
     });
   });
 
@@ -59,7 +57,9 @@ describe(RedmineApi.name, () => {
 `;
       // WHEN
 
-      const response = await lastValueFrom(redmineApi.markDayAsWorked(date));
+      const response = await lastValueFrom(
+        redmineApi.markDayAsWorked('2021-12-31', 26151, 'LCL'),
+      );
       expect(Axios.post).toBeCalledTimes(1);
       expect(Axios.post).toBeCalledWith(
         redmineBaseUrl + '/time_entries.json',
@@ -76,6 +76,7 @@ describe(RedmineApi.name, () => {
       expect(Array.isArray(response)).toBeFalsy();
     });
     it('should call the correct endpoint twice', async () => {
+      jest.clearAllMocks()
       // Given
       jest.spyOn(Axios, 'post').mockReturnValue(
         of({
@@ -106,10 +107,12 @@ describe(RedmineApi.name, () => {
 `;
       // WHEN
 
-      const response = await lastValueFrom(redmineApi.markDayAsWorked([date, date]));
+      const response = await lastValueFrom(
+        redmineApi.markDayAsWorked([date, date], 26151, 'LCL'),
+      );
       expect(Axios.post).toBeCalledTimes(2);
       expect(Axios.post).toBeCalledWith(
-        redmineBaseUrl + '/time_entries.json',
+      redmineBaseUrl + '/time_entries.json',
         requestBody,
         {
           headers: {
@@ -121,7 +124,7 @@ describe(RedmineApi.name, () => {
       expect(response).toBeDefined();
       expect(response).not.toBeNull();
       expect(Array.isArray(response)).toBeTruthy();
-      expect(response.length).toEqual(2)
+      expect(response.length).toEqual(2);
     });
   });
 });
