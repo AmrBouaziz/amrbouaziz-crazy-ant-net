@@ -1,0 +1,14 @@
+<label >Month :
+<input type="month"
+       [(ngModel)]="selectedMonth"
+       #month>
+</label>
+
+<button
+  (click)="onLoad()">Load</button>
+
+<label *ngFor="let day of monthDays"
+>
+  {{ day.date}} :
+  <input [value]="day.value">
+</label>
