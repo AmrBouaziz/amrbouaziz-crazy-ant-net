@@ -45,6 +45,6 @@ jobs:
           target_branch: gh-pages
           build_dir: dist/apps/front
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 permissions:
   contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.
