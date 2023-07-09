@@ -39,11 +39,12 @@ jobs:
       - name: Build Application
         run: npx nx affected -t build --parallel=3
 
-      - name: Archive Production Artifacts
-        uses: actions/upload-artifact@v2
+      - name: Deploy
+        uses: crazy-max/ghaction-github-pages@v1
         with:
-          name: dist
-          path: dist/apps/front
-
+          target_branch: gh-pages
+          build_dir: dist/apps/front
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
 permissions:
   contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.
