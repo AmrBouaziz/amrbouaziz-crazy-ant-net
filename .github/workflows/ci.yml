@@ -44,6 +44,8 @@ jobs:
         with:
           target_branch: gh-pages
           build_dir: dist/apps/front
+          verbose: true
+          domain: amrbouaziz.crazy-ant.net
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 permissions:
