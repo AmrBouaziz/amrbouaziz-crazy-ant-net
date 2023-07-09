@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReplaceTextPipe } from './replace-text.pipe';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [],
   declarations: [ReplaceTextPipe],
   exports: [ReplaceTextPipe],
 })
