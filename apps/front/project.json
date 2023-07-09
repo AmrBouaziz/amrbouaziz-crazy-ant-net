@@ -2,7 +2,7 @@
   "name": "front",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "crazy-ant",
+  "prefix": "to-be-replaced",
   "sourceRoot": "apps/front/src",
   "tags": [],
   "targets": {
@@ -15,7 +15,10 @@
         "main": "apps/front/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/front/tsconfig.app.json",
-        "assets": ["apps/front/src/favicon.ico", "apps/front/src/assets"],
+        "assets": [
+          "apps/front/src/favicon.ico",
+          "apps/front/src/assets"
+        ],
         "styles": ["apps/front/src/styles.scss"],
         "scripts": []
       },
@@ -68,7 +71,10 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/front/**/*.ts", "apps/front/**/*.html"]
+        "lintFilePatterns": [
+          "apps/front/**/*.ts",
+          "apps/front/**/*.html"
+        ]
       }
     },
     "test": {

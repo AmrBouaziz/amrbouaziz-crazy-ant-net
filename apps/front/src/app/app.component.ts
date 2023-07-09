@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from "@angular/router";
+import { RouterModule } from '@angular/router';
+import { NxWelcomeComponent } from './nx-welcome.component';
 
 @Component({
   standalone: true,
-  imports: [RouterModule],
-  selector: 'crazy-ant-root',
+  imports: [NxWelcomeComponent, RouterModule],
+  selector: 'to-be-replaced-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'front';
 }
-
