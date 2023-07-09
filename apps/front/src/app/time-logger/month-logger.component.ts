@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoggerDay } from './time-logger.types';
 import { daysInMonth } from './time-logger.utils';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'front-month-logger',
@@ -11,26 +12,32 @@ import { daysInMonth } from './time-logger.utils';
     </label>
   `,
 })
-export class MonthLoggerComponent {
+export class MonthLoggerComponent implements OnInit {
   monthDays: LoggerDay[] = [];
 
-  onLoad() {
-    // if (!this.selectedMonth) {
-    //   console.warn('please select a month.');
-    //   return;
-    // }
-    // const [year, month] = this.selectedMonth.split('-').map(Number);
-    // const daysInSelectedMonth = daysInMonth(year, month);
-    // this.monthDays = Array.from(
-    //   { length: daysInSelectedMonth },
-    //   (_, i): LoggerDay => {
-    //     return {
-    //       month,
-    //       year,
-    //       value: 0,
-    //       date: i + 1,
-    //     };
-    //   },
-    // );
+  constructor(private readonly route: ActivatedRoute) {}
+
+  populateMonthDays(year: number, month: number) {
+    const daysInSelectedMonth = daysInMonth(year, month);
+    this.monthDays = Array.from(
+      { length: daysInSelectedMonth },
+      (_, i): LoggerDay => {
+        return {
+          month,
+          year,
+          value: 0,
+          date: i + 1,
+        };
+      },
+    );
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.populateMonthDays(
+        Number(params.get('year')),
+        Number(params.get('month')),
+      );
+    });
   }
 }

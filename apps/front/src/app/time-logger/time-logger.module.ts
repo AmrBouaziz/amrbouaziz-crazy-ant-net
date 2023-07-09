@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { MonthSelectorComponent } from './month-selector.component';
 import { NgForOf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MonthLoggerComponent } from './month-logger.component';
+import { ReplaceTextPipeModule } from '@front/replace-text';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     NgForOf,
-    FormsModule,
     RouterModule.forChild([
       {
         path: '',
-        pathMatch: 'full',
         component: MonthSelectorComponent,
         children: [{ path: ':year/:month', component: MonthLoggerComponent }],
       },
     ]),
+    ReplaceTextPipeModule,
+    FormsModule,
   ],
   declarations: [MonthSelectorComponent, MonthLoggerComponent],
 })

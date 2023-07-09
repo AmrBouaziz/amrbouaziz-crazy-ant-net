@@ -8,7 +8,12 @@ import { Component } from '@angular/core';
       <input type="month" [(ngModel)]="selectedMonth" #month />
     </label>
 
-    <button [routerLink]="month.value">Load</button>
+    <button
+      [routerLink]="selectedMonth | replaceText : '-' : '/'"
+      [disabled]="selectedMonth === ''"
+    >
+      Load
+    </button>
 
     <router-outlet></router-outlet>
   `,
