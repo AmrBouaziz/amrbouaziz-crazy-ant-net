@@ -12,13 +12,15 @@ jobs:
       actions: 'read'
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
 
-      - name: Set Base SHA for nx affected commands
-        run: git branch --track main origin/main
+      #      - name: Set Base SHA for nx affected commands
+      #        run: git branch --track main origin/main
 
       - uses: nrwl/nx-set-shas@v3
 
