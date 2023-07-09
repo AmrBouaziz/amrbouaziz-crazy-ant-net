@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          cache: 'npm'
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check formatting
+        run: npx nx format:check
+
+      - name: Run Lint
+        run: npx nx affected -t lint --parallel=3
+
+      - name: Run Tests
+        run: npx nx test --parallel=3 --configuration=ci
+
+      - name: Build Application
+        run: npx nx build --parallel=3
+
+      - name: Archive Production Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist/apps/front
