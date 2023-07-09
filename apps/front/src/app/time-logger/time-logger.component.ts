@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -13,7 +13,19 @@ interface LoggerDay {
   standalone: true,
   selector: 'time-logger-component',
   imports: [NgForOf, FormsModule],
-  templateUrl: 'time-logger-component.component.html',
+  template: `
+    <label>
+      Month :
+      <input type="month" [(ngModel)]="selectedMonth" #month />
+    </label>
+
+    <button (click)="onLoad()">Load</button>
+
+    <label *ngFor="let day of monthDays">
+      {{ day.date }} :
+      <input [value]="day.value" />
+    </label>
+  `,
 })
 export class TimeLoggerComponent {
   selectedMonth = '';
@@ -26,16 +38,20 @@ export class TimeLoggerComponent {
     }
     const [year, month] = this.selectedMonth.split('-').map(Number);
     const daysInSelectedMonth = daysInMonth(year, month);
-    this.monthDays= Array.from({ length: daysInSelectedMonth }, (_, i): LoggerDay => {
-      return {
-        month,
-        year,
-        value: 0,
-        date: i + 1,
-      };
-    });
+    this.monthDays = Array.from(
+      { length: daysInSelectedMonth },
+      (_, i): LoggerDay => {
+        return {
+          month,
+          year,
+          value: 0,
+          date: i + 1,
+        };
+      },
+    );
   }
 }
+
 function daysInMonth(year: number, month: number) {
   return new Date(year, month, 0).getDate();
 }
