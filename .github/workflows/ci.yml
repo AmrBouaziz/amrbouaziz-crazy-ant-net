@@ -16,10 +16,11 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      - uses: nrwl/nx-set-shas@v3
 
       - name: Set Base SHA for nx affected commands
         run: git branch --track main origin/main
+
+      - uses: nrwl/nx-set-shas@v3
 
       - name: Install dependencies
         run: npm ci
