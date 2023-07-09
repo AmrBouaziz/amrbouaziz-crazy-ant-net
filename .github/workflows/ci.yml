@@ -42,10 +42,10 @@ jobs:
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v3
         with:
-          target_branch: gh-pages
           build_dir: dist/apps/front
           verbose: true
-          domain: amrbouaziz.crazy-ant.net
+          fqdn: amrbouaziz.crazy-ant.net
+          jekyll: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 permissions:
