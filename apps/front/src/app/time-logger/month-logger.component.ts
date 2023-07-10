@@ -6,10 +6,12 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'front-month-logger',
   template: `
-    <label *ngFor="let day of monthDays">
-      {{ day.date }} :
-      <input [value]="day.value" />
-    </label>
+    <div class="flex flex-col">
+      <label *ngFor="let day of monthDays">
+        {{ day.date }} :
+        <input [value]="day.value" />
+      </label>
+    </div>
   `,
 })
 export class MonthLoggerComponent implements OnInit {
