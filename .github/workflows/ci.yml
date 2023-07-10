@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - 'releases/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,9 +17,6 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-
-      #      - name: Set Base SHA for nx affected commands
-      #        run: git branch --track main origin/main
 
       - uses: nrwl/nx-set-shas@v3
 
