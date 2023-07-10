@@ -40,9 +40,7 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v3
         with:
           build_dir: dist/apps/front
-          verbose: true
           fqdn: amrbouaziz.crazy-ant.net
-          jekyll: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #permissions:
