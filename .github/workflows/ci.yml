@@ -35,7 +35,7 @@ jobs:
       - name: Build Application
         run: npx nx affected -t build --parallel=3
 
-      - name: Deploy
+      - name: Deploy to Github Pages
         uses: crazy-max/ghaction-github-pages@v3
         with:
           build_dir: dist/apps/front
